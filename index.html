@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>見た目を変えるダイエット計画</title>
+<style>
+  :root{
+    --bg:#f6f4ef;
+    --card:#ffffff;
+    --ink:#23332f;
+    --muted:#5f726e;
+    --line:#e4e0d6;
+    --teal:#14a08e;
+    --teal-d:#0c7a6c;
+    --teal-l:#d7efe9;
+    --coral:#f3795f;
+    --coral-l:#fde4dd;
+    --gold:#e7a93c;
+    --shadow:0 10px 30px rgba(20,60,55,.08);
+    --shadow-s:0 4px 14px rgba(20,60,55,.07);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,system-ui,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.85;
+    -webkit-font-smoothing:antialiased;letter-spacing:.01em;
+  }
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+
+  /* 進捗バー */
+  #bar{position:fixed;top:0;left:0;height:4px;width:0;
+    background:linear-gradient(90deg,var(--teal),var(--coral));z-index:50;transition:width .1s linear}
+
+  /* ヒーロー */
+  .hero{
+    background:radial-gradient(120% 120% at 80% 0%,rgba(255,255,255,.14) 0,transparent 55%),
+      linear-gradient(155deg,#0c7a6c 0%,#14a08e 55%,#3bbfa9 100%);
+    color:#fff;padding:88px 0 76px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-90px;bottom:-90px;width:280px;height:280px;
+    border-radius:50%;background:rgba(255,255,255,.08)}
+  .hero::before{content:"";position:absolute;left:-60px;top:-60px;width:200px;height:200px;
+    border-radius:50%;background:rgba(255,255,255,.07)}
+  .hero .wrap{position:relative;z-index:2}
+  .eyebrow{display:inline-block;font-size:13px;letter-spacing:.18em;font-weight:700;
+    background:rgba(255,255,255,.16);padding:6px 14px;border-radius:999px;margin-bottom:18px}
+  .hero h1{font-size:clamp(28px,7vw,46px);line-height:1.3;font-weight:800;margin-bottom:14px}
+  .hero p.lead{font-size:clamp(15px,3.6vw,18px);opacity:.95;max-width:560px}
+  .statline{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+  .stat{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+    border-radius:16px;padding:16px 20px;min-width:120px;flex:1}
+  .stat .n{font-size:clamp(24px,6vw,34px);font-weight:800;line-height:1.1}
+  .stat .l{font-size:12px;opacity:.85;margin-top:4px;letter-spacing:.04em}
+  .arrowpill{display:flex;align-items:center;justify-content:center;font-size:26px;opacity:.7}
+
+  /* セクション共通 */
+  section{padding:60px 0}
+  section.alt{background:var(--card)}
+  .kicker{display:flex;align-items:center;gap:10px;color:var(--teal-d);
+    font-weight:700;font-size:13px;letter-spacing:.14em;margin-bottom:10px}
+  .kicker .dot{width:8px;height:8px;border-radius:50%;background:var(--coral)}
+  h2{font-size:clamp(22px,5vw,30px);font-weight:800;line-height:1.4;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:15px;margin-bottom:28px}
+  h3{font-size:18px;font-weight:700;margin:26px 0 10px}
+  p{margin-bottom:12px}
+  .note{font-size:13px;color:var(--muted)}
+
+  /* カード／グリッド */
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;
+    padding:22px;box-shadow:var(--shadow-s)}
+  section.alt .card{background:var(--bg)}
+  .card .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;
+    justify-content:center;margin-bottom:14px;background:var(--teal-l)}
+  .card .ico svg{width:24px;height:24px;stroke:var(--teal-d);fill:none;stroke-width:2;
+    stroke-linecap:round;stroke-linejoin:round}
+  .card.coral .ico{background:var(--coral-l)}
+  .card.coral .ico svg{stroke:var(--coral)}
+  .card h4{font-size:17px;font-weight:700;margin-bottom:6px}
+  .card p{font-size:14px;color:var(--muted);margin-bottom:0}
+  .badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;
+    background:var(--teal-l);color:var(--teal-d);margin-top:10px}
+  .badge.mid{background:#fff3da;color:#a9760f}
+
+  /* 数値（カロリー収支） */
+  .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:center}
+  .numbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 8px;
+    box-shadow:var(--shadow-s)}
+  .numbox .v{font-size:clamp(22px,6vw,30px);font-weight:800;color:var(--teal-d)}
+  .numbox.coral .v{color:var(--coral)}
+  .numbox .u{font-size:11px;color:var(--muted)}
+  .numbox .t{font-size:12px;font-weight:700;margin-top:6px}
+  .balance{margin-top:26px;background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px;box-shadow:var(--shadow-s)}
+  .brow{margin:14px 0}
+  .brow .lab{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:6px}
+  .track{height:18px;background:#eef0ee;border-radius:999px;overflow:hidden}
+  .fill{height:100%;border-radius:999px;width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1)}
+  .fill.tdee{background:linear-gradient(90deg,#9fb7b2,#7fa39c)}
+  .fill.intake{background:linear-gradient(90deg,var(--teal),var(--teal-d))}
+  .fill.deficit{background:linear-gradient(90deg,var(--coral),#e7613f)}
+
+  /* ペース図 */
+  .chart{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 18px 10px;
+    box-shadow:var(--shadow-s);margin-bottom:18px;overflow-x:auto}
+  .pace-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .opt{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--card);box-shadow:var(--shadow-s)}
+  .opt.reco{border:2px solid var(--teal);position:relative}
+  .opt.reco::before{content:"おすすめ";position:absolute;top:-11px;left:16px;background:var(--teal);
+    color:#fff;font-size:11px;font-weight:700;padding:2px 10px;border-radius:999px}
+  .opt .big{font-size:24px;font-weight:800;color:var(--teal-d)}
+  .opt .small{font-size:13px;color:var(--muted)}
+
+  /* 2カラムリスト */
+  ul.clean{list-style:none}
+  ul.clean li{position:relative;padding-left:26px;margin-bottom:10px;font-size:14.5px}
+  ul.clean li::before{content:"";position:absolute;left:0;top:9px;width:14px;height:14px;border-radius:50%;
+    background:var(--teal-l);border:3px solid var(--teal)}
+  ul.cross li::before{background:var(--coral-l);border-color:var(--coral)}
+
+  /* do/dont */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .dd .col{border-radius:18px;padding:22px}
+  .dd .do{background:var(--teal-l)}
+  .dd .dont{background:var(--coral-l)}
+  .dd h4{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .dd .col p{font-size:14px}
+
+  /* 週間スケジュール */
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center}
+  .day{border-radius:12px;padding:12px 4px;font-size:12px;border:1px solid var(--line);background:var(--card)}
+  .day .d{font-weight:700;font-size:13px;margin-bottom:6px}
+  .day.train{background:var(--teal-l);border-color:transparent}
+  .day.cardio{background:#fff3da;border-color:transparent}
+  .day .act{font-size:11px;color:var(--muted);line-height:1.5}
+
+  /* 食事イメージ */
+  .meal{display:flex;gap:14px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line)}
+  .meal:last-child{border-bottom:none}
+  .meal .when{flex:0 0 64px;font-weight:800;color:var(--teal-d);font-size:14px}
+  .meal .what{font-size:14px}
+  .meal .what .kcal{font-size:12px;color:var(--muted)}
+
+  /* タイムライン（睡眠など強調） */
+  .hero-stat{background:linear-gradient(135deg,#0c7a6c,#14a08e);color:#fff;border-radius:18px;
+    padding:26px;text-align:center;box-shadow:var(--shadow)}
+  .hero-stat .big{font-size:clamp(28px,8vw,40px);font-weight:800}
+  .hero-stat .cap{opacity:.9;font-size:14px;margin-top:6px}
+
+  .callout{background:var(--coral-l);border-left:4px solid var(--coral);border-radius:0 12px 12px 0;
+    padding:16px 18px;margin:18px 0;font-size:14px}
+  .callout.safe{background:#fff7e6;border-color:var(--gold)}
+
+  /* 出典 */
+  footer{background:#1b2b28;color:#c7d3cf;padding:40px 0;font-size:13px}
+  footer a{color:#8fd6c8;word-break:break-all}
+  footer h4{color:#fff;margin-bottom:10px;font-size:14px}
+  .src{margin-bottom:6px;line-height:1.6}
+
+  /* アニメーション */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  .stagger>*{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .stagger.visible>*{opacity:1;transform:none}
+  .stagger.visible>*:nth-child(2){transition-delay:.1s}
+  .stagger.visible>*:nth-child(3){transition-delay:.2s}
+  .stagger.visible>*:nth-child(4){transition-delay:.3s}
+
+  @media (max-width:680px){
+    .nums{grid-template-columns:repeat(2,1fr)}
+    .g3,.g2,.pace-opts{grid-template-columns:1fr}
+    .dd{grid-template-columns:1fr}
+    .week{grid-template-columns:repeat(4,1fr)}
+    .statline{gap:10px}
+    .stat{min-width:0;padding:14px}
+    section{padding:46px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal,.stagger>*{opacity:1!important;transform:none!important;transition:none!important}
+    .fill{transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+
+<!-- ヒーロー -->
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">見た目を変える・無理しないダイエット計画</span>
+    <h1>筋肉を残して脂肪を落とす。<br>続けられる形で、半年。</h1>
+    <p class="lead">26歳・152cm。今の体重から、健康を崩さずに見た目を変えていくための計画です。エビデンス（RCT・メタ分析）にもとづいて、やることだけを絞りました。</p>
+    <div class="statline">
+      <div class="stat"><div class="n">54<small style="font-size:14px">kg</small></div><div class="l">今の体重</div></div>
+      <div class="arrowpill">→</div>
+      <div class="stat"><div class="n">44<small style="font-size:14px">kg</small></div><div class="l">目標</div></div>
+      <div class="stat"><div class="n">約6<small style="font-size:14px">ヶ月</small></div><div class="l">おすすめのペース</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- 方針 -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>この計画の考え方</div>
+      <h2>覚えることは、3つだけ</h2>
+      <p class="sub">細かいルールより、効くポイントに力を集中します。研究で一番はっきりしている3本柱です。</p>
+    </div>
+    <div class="grid g3 stagger reveal">
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M3 12h4l2 5 4-13 2 8h6"/></svg></div>
+        <h4>① 脂肪を落とす</h4>
+        <p>本質は「続けられるカロリー赤字」。食事のタイプ（糖質制限など）の優劣は小さく、続くかどうかが決め手です。</p>
+        <span class="badge">エビデンス：強</span>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M6 7v10M6 9h4M10 7v10M14 7v10M18 7v10M14 9h4"/></svg></div>
+        <h4>② 筋肉を守る</h4>
+        <p>赤字の中で筋肉を残すのは「筋トレ＋十分なタンパク質」。食事制限だけ・有酸素だけは、筋肉保持で最下位でした。</p>
+        <span class="badge">エビデンス：強</span>
+      </div>
+      <div class="card coral">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg></div>
+        <h4>③ 睡眠を削らない</h4>
+        <p>一番見落とされるレバー。寝不足だと同じ体重を落としても、筋肉が減って脂肪が残ります。減量中こそ寝ます。</p>
+        <span class="badge mid">エビデンス：中〜強</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 数値 -->
+<section class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>あなたの設定値</div>
+      <h2>1日の数字</h2>
+      <p class="sub">身長・体重・年齢・活動量から計算した目安です。体重が落ちると消費も下がるので、後で見直します（後述）。</p>
+    </div>
+    <div class="nums reveal">
+      <div class="numbox"><div class="v" data-count="1800">0</div><div class="u">kcal</div><div class="t">消費の目安<br>（TDEE）</div></div>
+      <div class="numbox"><div class="v" data-count="1400">0</div><div class="u">kcal</div><div class="t">目標の摂取</div></div>
+      <div class="numbox coral"><div class="v" data-count="400">0</div><div class="u">kcal</div><div class="t">1日の赤字</div></div>
+      <div class="numbox"><div class="v" data-count="100">0</div><div class="u">g</div><div class="t">タンパク質</div></div>
+    </div>
+
+    <div class="balance reveal">
+      <div class="brow">
+        <div class="lab"><span>消費（TDEE）</span><span>約1,800 kcal</span></div>
+        <div class="track"><div class="fill tdee" data-w="100"></div></div>
+      </div>
+      <div class="brow">
+        <div class="lab"><span>食べる量（目標）</span><span>約1,400 kcal</span></div>
+        <div class="track"><div class="fill intake" data-w="78"></div></div>
+      </div>
+      <div class="brow">
+        <div class="lab"><span>差＝脂肪を使う分</span><span>約400 kcal</span></div>
+        <div class="track"><div class="fill deficit" data-w="22"></div></div>
+      </div>
+      <p class="note" style="margin-top:14px">摂取は1,350〜1,450 kcalの幅でOK。ただし1,200 kcalを大きく下回るのは続かないし筋肉を削るので避けます。タンパク質100gは「1食あたり手のひら1枚分（20〜30g）」を3〜4回に分けると届きます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ペース -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>いつまでに</div>
+      <h2>ペースは選べます</h2>
+      <p class="sub">10kgを急いで落とすほど、筋肉が減り月経が乱れるリスクが上がります。緩やかなほど見た目はきれいに仕上がります。期限はここから相談して決めましょう。</p>
+    </div>
+
+    <div class="chart reveal">
+      <svg viewBox="0 0 640 260" width="100%" height="auto" role="img" aria-label="体重の推移グラフ（54kgから44kgへ）" style="min-width:560px">
+        <!-- 軸 -->
+        <line x1="50" y1="20" x2="50" y2="210" stroke="#d9d9d9"/>
+        <line x1="50" y1="210" x2="620" y2="210" stroke="#d9d9d9"/>
+        <!-- 目盛 -->
+        <text x="40" y="35" font-size="11" fill="#8a9a96" text-anchor="end">54</text>
+        <text x="40" y="125" font-size="11" fill="#8a9a96" text-anchor="end">49</text>
+        <text x="40" y="214" font-size="11" fill="#8a9a96" text-anchor="end">44</text>
+        <line x1="50" y1="120" x2="620" y2="120" stroke="#eee"/>
+        <!-- 推奨ライン（約6ヶ月） -->
+        <polyline class="paceline" points="50,30 145,66 240,100 335,128 430,154 525,180 600,200"
+          fill="none" stroke="#14a08e" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- 月ラベル -->
+        <text x="50" y="230" font-size="10" fill="#8a9a96" text-anchor="middle">開始</text>
+        <text x="240" y="230" font-size="10" fill="#8a9a96" text-anchor="middle">2ヶ月</text>
+        <text x="430" y="230" font-size="10" fill="#8a9a96" text-anchor="middle">4ヶ月</text>
+        <text x="600" y="230" font-size="10" fill="#8a9a96" text-anchor="middle">6ヶ月〜</text>
+        <circle cx="600" cy="200" r="6" fill="#f3795f"/>
+        <text x="600" y="188" font-size="11" fill="#f3795f" text-anchor="middle" font-weight="700">44kg</text>
+      </svg>
+    </div>
+
+    <div class="pace-opts reveal stagger">
+      <div class="opt">
+        <div class="big">約8ヶ月</div>
+        <div class="small">ゆっくり（約0.3kg/週）<br>筋肉と月経を一番守れる。見た目重視ならこれでも十分。</div>
+      </div>
+      <div class="opt reco">
+        <div class="big">約6ヶ月</div>
+        <div class="small">標準（約0.4kg/週）<br>無理なく続く範囲で、結果も出やすいバランス。</div>
+      </div>
+      <div class="opt">
+        <div class="big">約5ヶ月</div>
+        <div class="small">速め（約0.5kg/週・上限）<br>摂取が低めになり筋肉を削りやすい。短期間限定で。</div>
+      </div>
+    </div>
+    <div class="callout">体重は1日で1kg前後ゆれます。日々の数字に一喜一憂せず、<b>週の平均</b>で見てください。見た目が目的なので、最後は体重計の数字より<b>写真とウエスト</b>で判断します。44kgに届く前に「もう十分」と感じたら、そこで止めて大丈夫です。</div>
+  </div>
+</section>
+
+<!-- 食事 -->
+<section class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>食事プラン</div>
+      <h2>主役は「間食と甘いもの」の整え方</h2>
+      <p class="sub">禁止はしません。続かないからです。ここが一番効くポイントなので、無理なく量を減らす作戦にします。</p>
+    </div>
+
+    <div class="grid g2 reveal stagger">
+      <div class="card coral">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 7h16M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2M9 11v6M15 11v6M5 7l1 13h12l1-13"/></svg></div>
+        <h4>超加工の甘いものを減らす＝最大のレバー</h4>
+        <p>菓子パン・スナック・チョコ・甘い飲み物などは、カロリーや栄養を同じに揃えても、自由に食べると1日およそ500kcal多く食べてしまうことが実験で分かっています。ここを減らすのが一番効きます。</p>
+        <span class="badge mid">エビデンス：中〜強</span>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.6-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.4-7 10-7 10z"/></svg></div>
+        <h4>ゼロにせず「1日1回のご褒美枠」</h4>
+        <p>甘いものは完全にやめると反動が来ます。量を決めて1日1回だけ楽しむ枠を作ると、続けやすく罪悪感も減ります。</p>
+        <span class="badge">続けるコツ</span>
+      </div>
+    </div>
+
+    <h3>甘いもの・間食の欲求が来たときの対処</h3>
+    <ul class="clean reveal">
+      <li>食事はタンパク質と野菜から先に食べる。満腹感が出て、後の甘いもの欲が下がります。</li>
+      <li>間食をギリシャヨーグルト＋果物、素焼きナッツ少量、高カカオチョコ1〜2かけに置き換える。</li>
+      <li>甘い飲み物（ジュース・加糖コーヒー）は水・お茶・無糖炭酸に。液体の砂糖は満腹感が出ないまま積み上がります。</li>
+      <li>食物繊維（野菜・海藻・きのこ・豆・オートミール）を毎食。満腹感を助けます。ただし繊維「だけ」で食欲が止まるわけではないので、タンパク質と組み合わせます。</li>
+    </ul>
+
+    <h3>惣菜を買うときの選び方</h3>
+    <ul class="clean reveal">
+      <li>揚げ物より、焼き・蒸し・煮物を選ぶ。</li>
+      <li>タンパク質のおかず（焼き魚・蒸し鶏・冷奴・卵・豆）を1品入れる。</li>
+      <li>サラダ・お浸し・味噌汁・海藻を足して、野菜とかさを増やす。</li>
+    </ul>
+
+    <h3>タンパク質100gの目安（毎食 手のひら1枚＋間食）</h3>
+    <p class="note">例：卵2個（13g）／納豆1パック（8g）／鶏むね・ささみ100g（22g）／鮭1切れ（18g）／木綿豆腐半丁（10g）／ギリシャヨーグルト1個（10g）／プロテイン1杯（20g）。組み合わせて1日100gに。</p>
+
+    <h3>1日の食べ方イメージ（合計 約1,400 kcal）</h3>
+    <div class="card reveal" style="margin-top:8px">
+      <div class="meal"><div class="when">朝</div><div class="what">ギリシャヨーグルト＋果物＋オートミール、または 卵＋納豆＋ご飯軽め<br><span class="kcal">約350 kcal／タンパク質 約25g</span></div></div>
+      <div class="meal"><div class="when">昼</div><div class="what">タンパク質のおかず（魚か鶏）＋野菜たっぷり＋ご飯軽め。惣菜なら焼き魚＋サラダ＋おにぎり1個<br><span class="kcal">約450 kcal／タンパク質 約30g</span></div></div>
+      <div class="meal"><div class="when">間食</div><div class="what">プロテイン、ゆで卵、または高カカオチョコ少量（＝ご褒美枠）<br><span class="kcal">約150 kcal／タンパク質 約15g</span></div></div>
+      <div class="meal"><div class="when">夜</div><div class="what">タンパク質＋野菜スープかサラダ＋少量の主食。夜は軽め・揚げ物は控えめ<br><span class="kcal">約450 kcal／タンパク質 約30g</span></div></div>
+    </div>
+    <p class="note" style="margin-top:12px">主食（ご飯・パン）は抜かなくて大丈夫です。極端な糖質制限は必要ありません。量を「軽め」にするだけで足ります。</p>
+  </div>
+</section>
+
+<!-- 運動 -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>運動プラン</div>
+      <h2>見た目を作るのは、有酸素より筋トレ</h2>
+      <p class="sub">バドミントン部の経験があるので、フォーム習得は早いはずです。ジム週2〜3回を活かして、筋トレを軸にします。</p>
+    </div>
+
+    <div class="callout">「女性が筋トレでムキムキになる」は誤解です。女性は筋肉を大きくするホルモンが少なく、筋トレで起きるのは引き締まって見た目が整う方向です。安心して負荷をかけて大丈夫です。</div>
+
+    <h3>週2〜3回・全身の筋トレ（1回45〜60分）</h3>
+    <div class="grid g3 reveal stagger">
+      <div class="card"><h4>下半身</h4><p>スクワット／レッグプレス／ヒップスラスト。お尻・脚は見た目への効果が大きい部位です。</p></div>
+      <div class="card"><h4>背中・胸・肩</h4><p>ラットプルダウン／ロー／チェストプレス。姿勢が整い、上半身のラインが出ます。</p></div>
+      <div class="card"><h4>体幹</h4><p>プランク／アブドミナル。最後に5〜10分。</p></div>
+    </div>
+    <p class="note" style="margin-top:12px">同じ部位は中1〜2日あける。重さは「あと2〜3回で限界」くらいを目安に、少しずつ増やします。</p>
+
+    <h3>有酸素・日常の活動は「補助」</h3>
+    <ul class="clean reveal">
+      <li>自転車通勤15分は、毎日の良い土台です（こうした日常の活動量＝NEATは、体重維持の予測因子）。</li>
+      <li>有酸素は中・低強度を補助的に。高強度の有酸素「だけ」は、筋肉を犠牲に体重を落としやすいので主役にしません。</li>
+      <li>バドミントンなど、好きで続く運動を週末に足すのは◎。楽しさは継続の燃料です。</li>
+      <li>日常の歩数を少し増やす（エレベーターより階段、ひと駅歩く）。</li>
+    </ul>
+
+    <h3>週の組み方（例）</h3>
+    <div class="week reveal">
+      <div class="day train"><div class="d">月</div><div class="act">筋トレ<br>下半身</div></div>
+      <div class="day"><div class="d">火</div><div class="act">休養<br>通勤のみ</div></div>
+      <div class="day train"><div class="d">水</div><div class="act">筋トレ<br>上半身</div></div>
+      <div class="day"><div class="d">木</div><div class="act">休養<br>歩く</div></div>
+      <div class="day train"><div class="d">金</div><div class="act">筋トレ<br>全身</div></div>
+      <div class="day cardio"><div class="d">土</div><div class="act">好きな<br>有酸素</div></div>
+      <div class="day"><div class="d">日</div><div class="act">休養</div></div>
+    </div>
+    <p class="note" style="margin-top:12px">週2回でも効果は出ます。3回できる週は3回、忙しい週は2回で構いません。続けることが最優先です。</p>
+  </div>
+</section>
+
+<!-- 睡眠 -->
+<section class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>一番のレバー</div>
+      <h2>睡眠は「努力ゼロで効く」唯一の項目</h2>
+      <p class="sub">食事や運動をがんばっても、寝不足だと成果が目減りします。減量中こそ睡眠を確保してください。</p>
+    </div>
+    <div class="grid g2 reveal" style="align-items:center">
+      <div class="hero-stat">
+        <div class="big">7〜9時間</div>
+        <div class="cap">減量中に確保したい睡眠時間</div>
+      </div>
+      <div>
+        <p>研究では、同じだけ体重を落としても、睡眠を削った人は<b>減った分の多くが脂肪ではなく筋肉</b>でした。せっかくの食事制限が、睡眠不足で台無しになります。</p>
+        <p>短時間睡眠の人が睡眠を増やしただけで、食事の指示なしに摂取カロリーが自然に減った、という実験もあります。寝るのは食欲コントロールにも効きます。</p>
+        <span class="badge mid">エビデンス：中〜強</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 進捗 -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>記録のしかた</div>
+      <h2>何を、どれくらいの頻度で測るか</h2>
+      <p class="sub">見た目が目的なので、体重計の数字だけを追いません。指標を優先順位つきで。</p>
+    </div>
+    <div class="grid g2 reveal stagger">
+      <div class="card"><h4>① 写真（2週ごと）</h4><p>同じ服・同じ場所・同じ角度で。見た目の変化が一番はっきり出る指標です。これが本命。</p></div>
+      <div class="card"><h4>② ウエスト周囲径（週1）</h4><p>おへその高さをメジャーで。脂肪の変化を体重より素直に反映します。</p></div>
+      <div class="card"><h4>③ 体重（毎朝・週平均で見る）</h4><p>起床後トイレの後、同じ条件で。測り続けること自体が減量維持の予測因子です。日々の上下は気にしない。</p></div>
+      <div class="card"><h4>④ 体組成計の体脂肪率（参考程度）</h4><p>家庭用は精度が高くないので、絶対値より「下がる傾向か」だけ見ます。振り回されないように。</p></div>
+    </div>
+
+    <h3>見直しルール</h3>
+    <ul class="clean reveal">
+      <li>月1回、ペースを振り返る。順調なら変えない。</li>
+      <li>体重・ウエストとも2〜3週間動かなければ、摂取をあと100〜150kcal減らすか、活動量を少し増やす。</li>
+      <li>体重が4〜5kg落ちたら消費(TDEE)も下がるので、設定値を計算し直す。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- やる・やらない -->
+<section class="alt">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>俗説の整理</div>
+      <h2>やること / やらないこと</h2>
+      <p class="sub">巷でよく言われるけれど、研究では支持されない方法があります。労力を無駄にしないために。</p>
+    </div>
+    <div class="dd reveal stagger">
+      <div class="col do">
+        <h4>◎ やること</h4>
+        <ul class="clean">
+          <li>続けられるカロリー赤字をゆるく保つ</li>
+          <li>毎食タンパク質、間食を整える</li>
+          <li>週2〜3回の筋トレ</li>
+          <li>7〜9時間の睡眠</li>
+          <li>写真・ウエスト・体重を記録する</li>
+        </ul>
+      </div>
+      <div class="col dont">
+        <h4>× やらないこと</h4>
+        <ul class="clean cross">
+          <li>部分痩せ（腹だけ痩せる運動）に期待する</li>
+          <li>単品ダイエット・デトックス・置き換えだけ</li>
+          <li>1,200kcalを大きく下回る極端な絶食</li>
+          <li>「夜遅い食事＝即太る」と思い込む（本質は総量）</li>
+          <li>体重計の数字だけを追って一喜一憂する</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 安全 -->
+<section>
+  <div class="wrap">
+    <div class="reveal">
+      <div class="kicker"><span class="dot"></span>安全のために</div>
+      <h2>無理をしないための線引き</h2>
+    </div>
+    <div class="callout safe reveal">
+      <p style="margin-bottom:10px"><b>今は健康な体重です。</b> 目標の44kgは健康の範囲に収まりますが、その下限に近づきます。痩せること自体が目的ではなく、見た目を整えるための手段だと考えてください。</p>
+      <p style="margin-bottom:0">次のサインが出たら、ペースを緩めるか一度止めてください ── 月経が乱れる・止まる／強い疲れやめまい／抜け毛・冷え／気分の落ち込み。極端な減量は月経や骨の健康を損なうことが分かっています。</p>
+    </div>
+    <p class="note">この計画は一般的なエビデンスにもとづく情報で、医療助言ではありません。持病・服薬・体調の変化があるときや、計画に不安があるときは、医師や管理栄養士に相談してください。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h4>根拠にした主な研究</h4>
+    <div class="src">睡眠×体組成：Nedeltcheva 2010 (Ann Intern Med) ／ Wang 2018-2021 (約80%女性) ／ Tasali 2022 (JAMA Intern Med)</div>
+    <div class="src">超加工食品：Hall 2019 (Cell Metabolism, NIH代謝病棟RCT)</div>
+    <div class="src">日常活動量・体重維持：National Weight Control Registry (Catenacci 2008/2011)</div>
+    <div class="src">食事・カロリー・タンパク質・筋トレ：ISSN ポジションスタンド (Aragon 2017 / Jäger 2017) ／ Morton 2018 メタ分析 ／ Frontiers in Nutrition 2025 ネットワークメタ分析</div>
+    <div class="src">月経周期・低エネルギー利用能(RED-S)：McNulty 2020 メタ分析 ／ IOC REDs 合意声明</div>
+    <p class="note" style="color:#8aa49d;margin-top:14px">詳細な検証記録は社内ノート「ダイエット体組成改善・エビデンスリサーチ（第1〜3弾）」に保管。各クレームは3票の敵対的検証を通過したものです。｜作成 2026-06-27</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // 進捗バー
+  var bar=document.getElementById('bar');
+  function onScroll(){
+    var h=document.documentElement;
+    var sc=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
+    bar.style.width=(sc*100)+'%';
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // リビール＋カウントアップ＋バー
+  function countUp(el){
+    var target=parseInt(el.getAttribute('data-count'),10);
+    if(reduce){el.textContent=target.toLocaleString();return;}
+    var start=0,dur=1100,t0=null;
+    function step(ts){
+      if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);
+      var val=Math.floor((0.5-Math.cos(Math.PI*p)/2)*target);
+      el.textContent=val.toLocaleString();
+      if(p<1)requestAnimationFrame(step);else el.textContent=target.toLocaleString();
+    }
+    requestAnimationFrame(step);
+  }
+  function trigger(el){
+    if(el.classList.contains('visible'))return;
+    el.classList.add('visible');
+    el.querySelectorAll('[data-count]').forEach(countUp);
+    el.querySelectorAll('.fill').forEach(function(f){f.style.width=f.getAttribute('data-w')+'%';});
+    io.unobserve(el);
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){if(e.isIntersecting)trigger(e.target);});
+  },{threshold:0,rootMargin:'0px 0px -8% 0px'});
+  var items=document.querySelectorAll('.reveal');
+  items.forEach(function(el){io.observe(el);});
+
+  // 速いスクロールでトリガーが漏れても透明のまま残さない保険
+  function sweep(){
+    var h=window.innerHeight;
+    items.forEach(function(el){
+      if(el.classList.contains('visible'))return;
+      var r=el.getBoundingClientRect();
+      if(r.top < h*0.92) trigger(el);
+    });
+  }
+  window.addEventListener('scroll',sweep,{passive:true});
+  window.addEventListener('resize',sweep,{passive:true});
+  sweep();
+  // 最終保険: 何があっても5秒後に全要素を表示
+  setTimeout(function(){items.forEach(trigger);},5000);
+})();
+</script>
+</body>
+</html>
