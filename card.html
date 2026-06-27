@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1350px}
+  body{
+    font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;
+    background:linear-gradient(160deg,#0c7a6c 0%,#14a08e 55%,#3bbfa9 100%);
+    color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    padding:80px;position:relative;overflow:hidden;
+  }
+  body::before{content:"";position:absolute;left:-120px;top:-120px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.08)}
+  body::after{content:"";position:absolute;right:-140px;bottom:-140px;width:420px;height:420px;border-radius:50%;background:rgba(255,255,255,.07)}
+  .eyebrow{font-size:26px;letter-spacing:.18em;font-weight:700;background:rgba(255,255,255,.16);
+    padding:12px 28px;border-radius:999px;margin-bottom:36px;z-index:2}
+  h1{font-size:62px;font-weight:800;line-height:1.4;text-align:center;margin-bottom:14px;z-index:2}
+  .sub{font-size:30px;opacity:.92;margin-bottom:54px;z-index:2}
+  .qrwrap{background:#fff;border-radius:36px;padding:44px;box-shadow:0 30px 70px rgba(0,0,0,.25);z-index:2}
+  .qrwrap img{display:block;width:520px;height:520px}
+  .read{margin-top:46px;font-size:34px;font-weight:700;z-index:2}
+  .url{margin-top:18px;font-size:24px;opacity:.85;letter-spacing:.02em;z-index:2}
+  .foot{position:absolute;bottom:54px;font-size:22px;opacity:.7;z-index:2}
+</style>
+</head>
+<body>
+  <div class="eyebrow">筋肉を残して脂肪を落とす・6ヶ月プラン</div>
+  <h1>見た目を変える<br>ダイエット計画</h1>
+  <div class="sub">スマホでいつでも確認できます</div>
+  <div class="qrwrap"><img src="qr.png" alt="QRコード"></div>
+  <div class="read">スマホのカメラで読み取ってください</div>
+  <div class="url">tany4417-png.github.io/diet-plan</div>
+  <div class="foot">エビデンス（RCT・メタ分析）にもとづく計画</div>
+</body>
+</html>
