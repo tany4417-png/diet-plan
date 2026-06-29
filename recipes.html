@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>ダイエット夕食レシピ集 15品</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f6f3ec; --paper2:#efeadf; --card:#ffffff;
+    --ink:#22271e; --muted:#6f6a5c; --line:#e4decf;
+    --herb:#3f6b4a; --herb-d:#2f5238; --herb-l:#e8f0e5;
+    --amber:#b9591f; --amber-l:#f3e2d2;
+    --shadow:0 6px 20px rgba(47,82,56,.10);
+    --shadow-s:0 2px 8px rgba(47,82,56,.07);
+    /* protein chip colors */
+    --c-chicken-b:#e8f0e5; --c-chicken-t:#3f6b4a;
+    --c-pork-b:#f7e6de;    --c-pork-t:#a8542f;
+    --c-mince-b:#f1e7d2;   --c-mince-t:#856426;
+    --c-tofu-b:#e4eef0;    --c-tofu-t:#356a71;
+    --c-egg-b:#fbefd0;     --c-egg-t:#927210;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",Meiryo,system-ui,sans-serif;
+    color:var(--ink);background:var(--paper);line-height:1.85;
+    -webkit-font-smoothing:antialiased;letter-spacing:.01em;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 18px}
+  a{color:var(--herb-d)}
+
+  /* ===== Header ===== */
+  header.top{background:var(--herb);color:#f6f3ec;padding:34px 0 30px;border-bottom:4px solid var(--herb-d)}
+  header.top .eyebrow{font-size:12px;letter-spacing:.22em;opacity:.85;font-weight:500}
+  header.top h1{font-family:"Shippori Mincho",serif;font-weight:800;font-size:clamp(26px,5.6vw,40px);
+    line-height:1.35;margin:8px 0 10px;letter-spacing:.02em}
+  header.top p.lead{font-size:14.5px;max-width:680px;opacity:.95}
+  header.top .meta{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:13px;opacity:.92}
+  header.top .meta b{font-weight:700;color:#fff}
+
+  /* ===== Sticky filter bar (the signature) ===== */
+  .controls{position:sticky;top:0;z-index:30;background:rgba(246,243,236,.94);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);padding:12px 0}
+  .controls .wrap{display:flex;flex-direction:column;gap:10px}
+  .filt-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .filt-label{font-family:"Shippori Mincho",serif;font-weight:700;font-size:13px;color:var(--herb-d);
+    margin-right:2px;flex:0 0 auto;min-width:56px}
+  .chip{font-size:13px;font-weight:500;padding:6px 13px;border-radius:999px;border:1.5px solid var(--line);
+    background:var(--card);color:var(--ink);cursor:pointer;transition:all .18s;white-space:nowrap;line-height:1.3}
+  .chip:hover{border-color:var(--herb)}
+  .chip[aria-pressed="true"]{background:var(--herb);border-color:var(--herb);color:#fff}
+  .chip.method[aria-pressed="true"]{background:var(--amber);border-color:var(--amber)}
+  .toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between;
+    padding-top:4px;border-top:1px dashed var(--line)}
+  .toolbar .left{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .count{font-size:13px;color:var(--muted)} .count b{color:var(--amber);font-weight:700;font-size:15px}
+  select,.btn{font-family:inherit;font-size:13px;border:1.5px solid var(--line);background:var(--card);
+    color:var(--ink);border-radius:9px;padding:7px 11px;cursor:pointer}
+  .btn:hover,select:hover{border-color:var(--herb)}
+  .btn.primary{background:var(--herb);border-color:var(--herb);color:#fff;font-weight:700}
+  .btn.ghost{background:transparent}
+
+  /* ===== Legend ===== */
+  .legend{font-size:12.5px;color:var(--muted);padding:14px 0 2px}
+  .legend .tag{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:5px;margin:0 3px}
+  .legend .tag.pub{background:var(--herb-l);color:var(--herb-d)}
+  .legend .tag.est{background:var(--amber-l);color:var(--amber)}
+
+  /* ===== Grid ===== */
+  main{padding:18px 0 50px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;align-items:start}
+  .empty{display:none;text-align:center;color:var(--muted);padding:60px 0;font-size:15px}
+
+  /* ===== Recipe card ===== */
+  .rc{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:var(--shadow-s);display:flex;flex-direction:column}
+  .rc.hide{display:none}
+  .rc-head{padding:16px 18px 12px;border-bottom:1px solid var(--line);position:relative}
+  .rc-no{font-family:"Shippori Mincho",serif;font-size:12px;color:var(--muted);letter-spacing:.08em}
+  .rc-title{font-family:"Shippori Mincho",serif;font-weight:800;font-size:20px;line-height:1.4;margin:2px 0 10px;color:var(--ink)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tg{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:6px;line-height:1.4}
+  .tg.protein.chicken{background:var(--c-chicken-b);color:var(--c-chicken-t)}
+  .tg.protein.pork{background:var(--c-pork-b);color:var(--c-pork-t)}
+  .tg.protein.mince{background:var(--c-mince-b);color:var(--c-mince-t)}
+  .tg.protein.tofu{background:var(--c-tofu-b);color:var(--c-tofu-t)}
+  .tg.protein.egg{background:var(--c-egg-b);color:var(--c-egg-t)}
+  .tg.meth{background:#fff;border:1.5px solid var(--line);color:var(--muted)}
+  .tg.time{background:#fff;border:1.5px solid var(--line);color:var(--muted)}
+
+  .rc-body{padding:14px 18px 4px;display:flex;flex-direction:column;gap:12px}
+  .blk-h{font-family:"Shippori Mincho",serif;font-weight:700;font-size:13px;color:var(--herb-d);
+    display:flex;align-items:center;gap:7px;margin-bottom:4px}
+  .blk-h::before{content:"";width:5px;height:14px;background:var(--herb);border-radius:2px;flex:0 0 auto}
+  .ing{font-size:13.5px;color:#3a3f33;line-height:1.7}
+  .ing .srv{font-size:11.5px;color:var(--muted);font-weight:500}
+  ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:7px}
+  ol.steps li{position:relative;padding-left:28px;font-size:13.5px;line-height:1.65;color:#3a3f33}
+  ol.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:1px;
+    width:20px;height:20px;border-radius:6px;background:var(--herb-l);color:var(--herb-d);
+    font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+
+  /* nutrition */
+  .nut{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:12px 12px 10px;margin-top:2px}
+  .nut-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+  .nut-cell .v{font-weight:900;font-size:19px;line-height:1.1;font-variant-numeric:tabular-nums}
+  .nut-cell.kcal .v{color:var(--amber);font-size:22px}
+  .nut-cell .u{font-size:10px;color:var(--muted)}
+  .nut-cell .l{font-size:10.5px;color:var(--muted);margin-top:2px}
+  .nut-rice{font-size:11.5px;color:var(--muted);margin-top:9px;padding-top:8px;border-top:1px dashed var(--line);
+    display:flex;align-items:center;gap:6px;line-height:1.5}
+  .nut-rice b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+  .nut-src{font-size:10.5px;color:var(--muted);margin-top:7px}
+  .nut-src .pub{color:var(--herb-d);font-weight:700} .nut-src .est{color:var(--amber);font-weight:700}
+
+  .rc-foot{padding:10px 18px 16px;margin-top:auto}
+  .rc-foot a{font-size:12.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+  .rc-foot a:hover{text-decoration:underline}
+  .rc-foot a::after{content:"↗";font-size:11px}
+  .note-tip{font-size:12px;color:var(--muted);background:var(--amber-l);border-radius:8px;
+    padding:8px 11px;line-height:1.55}
+
+  footer{background:var(--herb-d);color:#dfe7da;padding:30px 0;font-size:12.5px;line-height:1.7}
+  footer .wrap{display:flex;flex-direction:column;gap:6px}
+  footer b{color:#fff}
+
+  @media (max-width:680px){
+    .grid{grid-template-columns:1fr}
+    .filt-label{min-width:auto;width:100%}
+    .nut-cell .v{font-size:17px} .nut-cell.kcal .v{font-size:20px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+  @media print{
+    .controls{position:static} .rc{break-inside:avoid;box-shadow:none}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">DINNER RECIPES ・ ダイエット計画の「夜の型」を増やす</div>
+    <p style="margin-bottom:6px"><a href="./" style="color:#fff;font-weight:700;font-size:13px;text-decoration:none;border-bottom:1.5px solid rgba(255,255,255,.55);padding-bottom:2px">← 6ヶ月ダイエット計画にもどる</a></p>
+    <h1>今夜のもう一品が、すぐ決まる。<br>夕食レシピ集 15品</h1>
+    <p class="lead">ダイエット計画の夕食の目安（約450kcal／たんぱく質30g）に合わせて、世に出回っている定番レシピから15品を選びました。すべて魚介・にんにくは使いません。電子レンジかフライパン中心で、安く・短時間で作れるものだけです。</p>
+    <div class="meta">
+      <span>🐟 <b>魚介なし</b></span>
+      <span>🧄 <b>にんにくなし</b></span>
+      <span>⏱ <b>3〜16分</b></span>
+      <span>💰 <b>45〜240円/人</b></span>
+      <span>📊 栄養は <b>kcal・たんぱく質・脂質・糖質</b> を表示</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Controls ===== -->
+<div class="controls">
+  <div class="wrap">
+    <div class="filt-row" id="protRow">
+      <span class="filt-label">タンパク源</span>
+      <button class="chip protein" data-prot="chicken" aria-pressed="false">鶏むね・ささみ</button>
+      <button class="chip protein" data-prot="pork" aria-pressed="false">豚</button>
+      <button class="chip protein" data-prot="mince" aria-pressed="false">ひき肉</button>
+      <button class="chip protein" data-prot="tofu" aria-pressed="false">豆腐・厚揚げ</button>
+      <button class="chip protein" data-prot="egg" aria-pressed="false">卵</button>
+    </div>
+    <div class="filt-row" id="methRow">
+      <span class="filt-label">調理法</span>
+      <button class="chip method" data-meth="レンジ" aria-pressed="false">電子レンジ</button>
+      <button class="chip method" data-meth="フライパン" aria-pressed="false">フライパン</button>
+      <button class="chip method" data-meth="鍋" aria-pressed="false">鍋</button>
+    </div>
+    <div class="toolbar">
+      <div class="left">
+        <span class="count"><b id="cnt">15</b> 品を表示中</span>
+        <button class="btn ghost" id="reset">条件をクリア</button>
+      </div>
+      <div class="left">
+        <button class="btn primary" id="lucky">🍽 今夜これ</button>
+        <label style="font-size:12.5px;color:var(--muted)">並べ替え
+          <select id="sort">
+            <option value="default">おすすめ順</option>
+            <option value="time">時短順</option>
+            <option value="kcal">低カロリー順</option>
+            <option value="protein">高たんぱく順</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="legend">
+      栄養の数値：<span class="tag pub">掲載値</span>＝出典サイトに記載／<span class="tag est">予想値</span>＝材料からの概算。予想値は前後する場合があります。<b>「+ご飯80g」</b>は白米80g（約130kcal・糖質約29g）を足した夕食合計の目安です。
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div class="grid" id="grid">
+
+      <!-- 1 -->
+      <article class="rc" data-prot="chicken" data-meth="レンジ" data-time="15" data-kcal="200" data-pg="28" data-i="1">
+        <div class="rc-head">
+          <div class="rc-no">No.01</div>
+          <h2 class="rc-title">ねぎ塩蒸し鶏</h2>
+          <div class="tags">
+            <span class="tg protein chicken">鶏むね</span>
+            <span class="tg meth">電子レンジ</span>
+            <span class="tg time">約15分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">鶏むね肉（皮なし）250g・料理酒 大1・塩 小1/4・長ねぎの青い部分 1/2本・ごま油 大1・鶏ガラスープの素 小1/2・黒こしょう・白いりごま</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>むね肉に酒・塩で下味をつけ、ラップして600Wで2分→裏返して2分。</li>
+              <li>長ねぎ・ごま油・鶏ガラ・こしょうを混ぜてねぎ塩だれを作る。</li>
+              <li>切った鶏肉にたれをかけ、ごまをふる。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">200</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">28</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">8</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">2</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約330kcal / P30 / 糖質31</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>（皮なし・1人分）</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://www.kurashiru.com/recipes/6e65d3e4-4986-410d-8784-60bc7865ed08" target="_blank" rel="noopener">クラシル で見る</a></div>
+      </article>
+
+      <!-- 2 -->
+      <article class="rc" data-prot="chicken" data-meth="レンジ" data-time="10" data-kcal="220" data-pg="30" data-i="2">
+        <div class="rc-head">
+          <div class="rc-no">No.02</div>
+          <h2 class="rc-title">鶏むねの甘酢煮</h2>
+          <div class="tags">
+            <span class="tg protein chicken">鶏むね</span>
+            <span class="tg meth">電子レンジ</span>
+            <span class="tg time">約10分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ むね1枚（2食分）</span></div>
+            <div class="ing">鶏むね肉 1枚（300〜330g）・醤油 大2・酢 大2・砂糖 大2・水 大2</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>むね肉をフォークで全体に刺す。</li>
+              <li>混ぜた調味料と一緒に600Wで3分（皮を上）→裏返して2分30秒。</li>
+              <li>そのまま余熱で5分おき、食べやすく切る。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">220</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">30</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">4</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">10</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約350kcal / P32 / 糖質39</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>（皮を外すと約190kcal）</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://mariegohan.com/10510" target="_blank" rel="noopener">つくりおき食堂 で見る</a></div>
+      </article>
+
+      <!-- 3 -->
+      <article class="rc" data-prot="chicken" data-meth="フライパン" data-time="15" data-kcal="344" data-pg="37" data-i="3">
+        <div class="rc-head">
+          <div class="rc-no">No.03</div>
+          <h2 class="rc-title">鶏むねの照り焼き</h2>
+          <div class="tags">
+            <span class="tg protein chicken">鶏むね</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約15分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">鶏むね肉 1枚・塩こしょう・片栗粉 大1・サラダ油 大1・酒 大1・みりん 大2・砂糖 大1・しょうゆ 大2・白いりごま</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>そぎ切りにして片栗粉をまぶす。</li>
+              <li>両面を焼き、余分な油をふき取る。</li>
+              <li>調味料を加えて煮詰め、ごまをふる。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">344</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">37</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">9.7</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">18</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約474kcal / P39 / 糖質47</b></div>
+            <div class="nut-src">kcal・P・脂質は<span class="pub">掲載値</span>／糖質は<span class="est">予想値</span>。油を減らすと低脂質に</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://delishkitchen.tv/recipes/118520140160565572" target="_blank" rel="noopener">デリッシュキッチン で見る</a></div>
+      </article>
+
+      <!-- 4 -->
+      <article class="rc" data-prot="chicken" data-meth="フライパン" data-time="15" data-kcal="148" data-pg="21" data-i="4">
+        <div class="rc-head">
+          <div class="rc-no">No.04</div>
+          <h2 class="rc-title">ささみの梅しそチーズ焼き</h2>
+          <div class="tags">
+            <span class="tg protein chicken">ささみ</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約15分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 1人分</span></div>
+            <div class="ing">鶏ささみ 4枚（160g）・塩・黒こしょう・薄力粉 小1・梅干し 大1個（10g）・スライスチーズ 2枚（20g）・大葉 4枚・油</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>ささみを開いて薄くする。</li>
+              <li>梅・チーズ・大葉をはさみ、薄力粉をまぶす。</li>
+              <li>フライパンで両面を焼く。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">148</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">21.2</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">5.5</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">4</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約278kcal / P23 / 糖質33</b></div>
+            <div class="nut-src">kcal・P・脂質は<span class="pub">掲載値</span>／糖質は<span class="est">予想値</span>。15品で最も低カロリー</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://recipe.shidax.co.jp/recipe/outline/112" target="_blank" rel="noopener">シダックス ソラレピ で見る</a></div>
+      </article>
+
+      <!-- 5 -->
+      <article class="rc" data-prot="chicken" data-meth="フライパン" data-time="16" data-kcal="226" data-pg="32" data-i="5">
+        <div class="rc-head">
+          <div class="rc-no">No.05</div>
+          <h2 class="rc-title">鶏むねのやわらかステーキ</h2>
+          <div class="tags">
+            <span class="tg protein chicken">鶏むね</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約16分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">鶏むね肉 1枚（300g）・酒 大1・塩 小1/2・こしょう <span class="srv">（調味料はほぼこれだけ＝最安・最シンプル）</span></div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>酒・塩こしょうをもみ込む。</li>
+              <li>皮目を下にし、蓋をして弱火で10分。</li>
+              <li>火を止めて余熱5分→最後に強火1分で焼き色をつける。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">226</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">32</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">10</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">1</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約356kcal / P34 / 糖質30</b></div>
+            <div class="nut-src">kcal・Pは<span class="pub">掲載値</span>／脂質・糖質は<span class="est">予想値</span>。皮を外すと低脂質</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://delishkitchen.tv/recipes/328220590286569913" target="_blank" rel="noopener">デリッシュキッチン で見る</a></div>
+      </article>
+
+      <!-- 6 -->
+      <article class="rc" data-prot="pork" data-meth="レンジ" data-time="6" data-kcal="185" data-pg="22" data-i="6">
+        <div class="rc-head">
+          <div class="rc-no">No.06</div>
+          <h2 class="rc-title">豚肉とキャベツのレンジ蒸し</h2>
+          <div class="tags">
+            <span class="tg protein pork">豚もも</span>
+            <span class="tg meth">電子レンジ</span>
+            <span class="tg time">約6分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">豚もも肉 200g・キャベツ 300g・もやし 1/2袋・柚子こしょう 大2・ポン酢しょうゆ 大2・万能ねぎ・糸切り唐辛子</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>キャベツをざく切りにして耐熱皿に敷く。</li>
+              <li>柚子こしょうを塗った豚もも肉と、もやしをのせる。</li>
+              <li>ラップして600Wで6分。ポン酢を回しかける。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">185</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">22</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">7</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">9</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約315kcal / P24 / 糖質38</b></div>
+            <div class="nut-src">kcalは<span class="pub">掲載値</span>／P・脂質・糖質は<span class="est">予想値</span>。野菜がたっぷり摂れる</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://www.kurashiru.com/recipe_cards/94a052e6-5427-4eaf-8b4f-bf795f791312" target="_blank" rel="noopener">クラシル で見る</a></div>
+      </article>
+
+      <!-- 7 -->
+      <article class="rc" data-prot="pork" data-meth="フライパン" data-time="10" data-kcal="330" data-pg="19" data-i="7">
+        <div class="rc-head">
+          <div class="rc-no">No.07</div>
+          <h2 class="rc-title">豚の生姜焼き</h2>
+          <div class="tags">
+            <span class="tg protein pork">豚</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約10分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">豚ロース薄切り 200g（<b>豚ももにすると低脂質</b>）・塩こしょう・片栗粉 小2・しょうゆ 大1・料理酒 小2・みりん 小2・すりおろし生姜 小2・砂糖 小1・サラダ油 大1・キャベツ 100g</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>豚肉に塩こしょう・片栗粉をまぶす。</li>
+              <li>中火で3分焼く。</li>
+              <li>合わせ調味料を絡めながら3分、ごまをふる。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">330</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">19</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">24</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">12</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約460kcal / P21 / 糖質41</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>。<b>豚もも＋油控えめで約230kcal・脂質12g</b>に下げられる</div>
+          </div>
+        </div>
+        <div class="rc-foot">
+          <div class="note-tip" style="margin-bottom:8px">ダイエット向けには豚ももを選び、焼き油を小1に。これで脂質・カロリーがぐっと下がります。</div>
+          <a href="https://www.kurashiru.com/recipes/943bb7e9-f3f3-4d70-8706-678c826a3655" target="_blank" rel="noopener">クラシル で見る</a>
+        </div>
+      </article>
+
+      <!-- 8 -->
+      <article class="rc" data-prot="mince" data-meth="フライパン" data-time="10" data-kcal="310" data-pg="30" data-i="8">
+        <div class="rc-head">
+          <div class="rc-no">No.08</div>
+          <h2 class="rc-title">鶏ひき肉と豆腐のつくね</h2>
+          <div class="tags">
+            <span class="tg protein mince">鶏ひき肉</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約10分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">鶏ひき肉 300g（<b>むねひきで低脂質</b>）・絹ごし豆腐 150g・玉ねぎみじん切り 100g・大葉 3枚・片栗粉 大1・酒 大1（＋蒸し焼き用 大3）・おろし生姜 小1・塩・醤油 大1・みりん 大2・油 小2</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>材料を混ぜて成形する。</li>
+              <li>フライパンで焼き、酒を加えて蒸し焼きにする。</li>
+              <li>醤油・みりんのたれを絡める。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">310</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">30</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">16</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">12</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約440kcal / P32 / 糖質41</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>。豆腐でかさ増しして高たんぱく</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://asajikan.jp/article/282340" target="_blank" rel="noopener">朝時間.jp で見る</a></div>
+      </article>
+
+      <!-- 9 -->
+      <article class="rc" data-prot="mince" data-meth="フライパン" data-time="10" data-kcal="150" data-pg="23" data-i="9">
+        <div class="rc-head">
+          <div class="rc-no">No.09</div>
+          <h2 class="rc-title">痩せ鶏そぼろ丼</h2>
+          <div class="tags">
+            <span class="tg protein mince">鶏むねひき</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約10分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 約4人分（主菜は1/2量目安）</span></div>
+            <div class="ing">鶏むねひき肉 200g・えのき 100g・しょうゆ 大1.5・みりん 大1・砂糖 大1/2・しょうが</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>えのきをみじん切りにする。</li>
+              <li>ひき肉と一緒に炒める。</li>
+              <li>調味料を入れ、汁気がなくなるまで炒めてご飯にのせる。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">150</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">23</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">3</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">8</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約280kcal / P25 / 糖質37</b></div>
+            <div class="nut-src">そぼろのみ・<span class="est">予想値</span>（ご飯別）。えのきでかさ増し</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://www.kurashiru.com/shorts/20f9adf5-ecba-46f6-848e-58c9ad8b33c0" target="_blank" rel="noopener">クラシル で見る</a></div>
+      </article>
+
+      <!-- 10 -->
+      <article class="rc" data-prot="tofu" data-meth="フライパン" data-time="10" data-kcal="305" data-pg="17" data-i="10">
+        <div class="rc-head">
+          <div class="rc-no">No.10</div>
+          <h2 class="rc-title">厚揚げの照り焼き</h2>
+          <div class="tags">
+            <span class="tg protein tofu">厚揚げ</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約10分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">厚揚げ 2枚（約300g）・片栗粉・すき焼のたれ 大3・いりごま・サラダ油</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>厚揚げを熱湯で油抜きし、4等分して片栗粉を薄くまぶす。</li>
+              <li>全面を焼く。</li>
+              <li>すき焼のたれを絡め、ごまをふる。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">305</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">17.2</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">22</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">9</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約435kcal / P19 / 糖質38</b></div>
+            <div class="nut-src">kcal・Pは<span class="pub">掲載値</span>／脂質・糖質は<span class="est">予想値</span>。油抜きで脂質ダウン</div>
+          </div>
+        </div>
+        <div class="rc-foot">
+          <div class="note-tip" style="margin-bottom:8px">たんぱく質を増やしたいときは、卵1個か蒸し鶏を少し足すと夜の目標30gに近づきます。</div>
+          <a href="https://www.ebarafoods.com/recipe/detail/recipe2765.php" target="_blank" rel="noopener">エバラ食品 で見る</a>
+        </div>
+      </article>
+
+      <!-- 11 -->
+      <article class="rc" data-prot="tofu" data-meth="フライパン" data-time="15" data-kcal="300" data-pg="17" data-i="11">
+        <div class="rc-head">
+          <div class="rc-no">No.11</div>
+          <h2 class="rc-title">厚揚げ入りニラ玉</h2>
+          <div class="tags">
+            <span class="tg protein tofu">厚揚げ＋卵</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約15分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">ニラ 100g・厚揚げ 1枚（200g）・溶き卵 2個分・しょうゆ 大1・砂糖 大1・みりん 小1・顆粒和風だし 小1・ごま油 大1</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>ごま油で厚揚げを2分炒める。</li>
+              <li>ニラを加えてさっと炒め、調味料をなじませる。</li>
+              <li>溶き卵を回し入れ、弱火で半熟〜火が通るまで。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">300</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">17</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">22</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">8</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約430kcal / P19 / 糖質37</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>。ごま油を小2に減らすと約50kcalカット</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://www.kurashiru.com/recipes/701b9fc2-20fc-4bb2-8de7-f3694f7d476f" target="_blank" rel="noopener">クラシル で見る</a></div>
+      </article>
+
+      <!-- 12 -->
+      <article class="rc" data-prot="tofu" data-meth="鍋" data-time="8" data-kcal="246" data-pg="16" data-i="12">
+        <div class="rc-head">
+          <div class="rc-no">No.12</div>
+          <h2 class="rc-title">高野豆腐の含め煮</h2>
+          <div class="tags">
+            <span class="tg protein tofu">高野豆腐</span>
+            <span class="tg meth">鍋</span>
+            <span class="tg time">煮込み8分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">高野豆腐 3個（51g）・にんじん 1/2本・しめじ 1/2パック・スナップえんどう 4本・水 300cc・和風顆粒だし 小2・酒 大1・砂糖 大1・みりん 大2・しょうゆ 大1/2・塩 小1/3</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>高野豆腐を戻す。</li>
+              <li>調味料を煮立て、高野豆腐・野菜を入れ落としぶたで7〜8分。</li>
+              <li>最後にスナップえんどうをひと煮する。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">246</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">15.5</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">12</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">15</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約376kcal / P17 / 糖質44</b></div>
+            <div class="nut-src">kcal・Pは<span class="pub">掲載値</span>／脂質・糖質は<span class="est">予想値</span>。煮込みは8分</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://delishkitchen.tv/recipes/136465788692332929" target="_blank" rel="noopener">デリッシュキッチン で見る</a></div>
+      </article>
+
+      <!-- 13 -->
+      <article class="rc" data-prot="egg" data-meth="レンジ" data-time="3" data-kcal="250" data-pg="20" data-i="13">
+        <div class="rc-head">
+          <div class="rc-no">No.13</div>
+          <h2 class="rc-title">レンジ3分とろたま豆腐</h2>
+          <div class="tags">
+            <span class="tg protein egg">卵＋豆腐</span>
+            <span class="tg meth">電子レンジ</span>
+            <span class="tg time">約3分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 1人分</span></div>
+            <div class="ing">卵 2個・絹ごし豆腐 1/2丁・長ねぎ 10cm・めんつゆ（2倍濃縮）大1.5・水 大1.5・醤油 ひと回し</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>長ねぎを小口切りにする。</li>
+              <li>卵と調味料を混ぜる。</li>
+              <li>豆腐とねぎを加え、600Wで3〜3分半加熱する。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">250</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">20</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">15</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">8</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約380kcal / P22 / 糖質37</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>。めんつゆはかつおだしベース（味噌汁と同程度）</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://www.kurashiru.com/recipe_cards/bb63debb-b4a2-4c78-af08-8d9d88bd9347" target="_blank" rel="noopener">クラシル で見る</a></div>
+      </article>
+
+      <!-- 14 -->
+      <article class="rc" data-prot="tofu" data-meth="鍋" data-time="10" data-kcal="330" data-pg="27" data-i="14">
+        <div class="rc-head">
+          <div class="rc-no">No.14</div>
+          <h2 class="rc-title">キムチチゲ</h2>
+          <div class="tags">
+            <span class="tg protein tofu">豆腐＋豚＋卵</span>
+            <span class="tg meth">鍋</span>
+            <span class="tg time">約10分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 1人分</span></div>
+            <div class="ing">絹ごし豆腐 200g・キムチ 100g・豚ロース薄切り 50g（もも可）・豆板醤 小1/2・卵 1個・水 100cc・酒・醤油 各小1・鶏ガラスープの素 小1/2・こねぎ・黒こしょう</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>小鍋で豚肉・キムチ・豆板醤を炒める。</li>
+              <li>水と調味料で煮立て、豆腐を加える。</li>
+              <li>卵を落とし、好みの固さに火を通す。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">330</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">27</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">20</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">10</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約460kcal / P29 / 糖質39</b></div>
+            <div class="nut-src">すべて<span class="est">予想値</span>。だしは鶏ガラ。温かいスープで満足感◎</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://www.kurashiru.com/recipe_cards/1278f3dd-cd8f-421a-9cea-493b4ffd411b" target="_blank" rel="noopener">クラシル で見る</a></div>
+      </article>
+
+      <!-- 15 -->
+      <article class="rc" data-prot="egg" data-meth="フライパン" data-time="15" data-kcal="240" data-pg="15" data-i="15">
+        <div class="rc-head">
+          <div class="rc-no">No.15</div>
+          <h2 class="rc-title">納豆オムレツ</h2>
+          <div class="tags">
+            <span class="tg protein egg">卵＋納豆</span>
+            <span class="tg meth">フライパン</span>
+            <span class="tg time">約15分</span>
+          </div>
+        </div>
+        <div class="rc-body">
+          <div>
+            <div class="blk-h">主な材料 <span class="ing srv">／ 2人分</span></div>
+            <div class="ing">卵 3個・納豆（たれ付き）1パック・長ねぎ 10cm・塩こしょう・サラダ油 大1・刻みのり</div>
+          </div>
+          <div>
+            <div class="blk-h">作り方</div>
+            <ol class="steps">
+              <li>納豆・たれ・ねぎを混ぜる。</li>
+              <li>溶き卵を半熟に焼く。</li>
+              <li>納豆をのせて包み、のりをのせる。</li>
+            </ol>
+          </div>
+          <div class="nut">
+            <div class="nut-grid">
+              <div class="nut-cell kcal"><div class="v">240</div><div class="u">kcal</div><div class="l">カロリー</div></div>
+              <div class="nut-cell"><div class="v">14.6</div><div class="u">g</div><div class="l">たんぱく質</div></div>
+              <div class="nut-cell"><div class="v">16</div><div class="u">g</div><div class="l">脂質</div></div>
+              <div class="nut-cell"><div class="v">3</div><div class="u">g</div><div class="l">糖質</div></div>
+            </div>
+            <div class="nut-rice">＋ご飯80gで <b>約370kcal / P17 / 糖質32</b></div>
+            <div class="nut-src">kcal・Pは<span class="pub">掲載値</span>／脂質・糖質は<span class="est">予想値</span>。チーズ20gでP底上げ</div>
+          </div>
+        </div>
+        <div class="rc-foot"><a href="https://delishkitchen.tv/recipes/207448678179275110" target="_blank" rel="noopener">デリッシュキッチン で見る</a></div>
+      </article>
+
+    </div>
+    <div class="empty" id="empty">条件に合うレシピがありません。条件をクリアしてください。</div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>使い方</b>：上のバーでタンパク源や調理法を選ぶと、その場で絞り込めます。「今夜これ」を押すと、表示中の中から1品をランダムで提案します。</div>
+    <div><b>栄養の見方</b>：<span style="color:#fff">掲載値</span>＝出典サイト記載の数値。<span style="color:#fff">予想値</span>＝材料からの概算で、作り方や分量で前後します。正確に管理したい日は「あすけん」に材料を入れて確認してください。</div>
+    <div>魚介・にんにくは全品不使用。ダイエット計画の夕食の目安（約450kcal／たんぱく質30g）に合わせています。｜出典：クラシル・デリッシュキッチン・つくりおき食堂・シダックス・エバラ食品・朝時間.jp（各カードのリンク先）</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var grid=document.getElementById('grid');
+  var cards=[].slice.call(document.querySelectorAll('.rc'));
+  var cnt=document.getElementById('cnt');
+  var empty=document.getElementById('empty');
+  var sortSel=document.getElementById('sort');
+  var activeProt=new Set(), activeMeth=new Set();
+
+  function apply(){
+    var n=0;
+    cards.forEach(function(c){
+      var okP=activeProt.size===0||activeProt.has(c.dataset.prot);
+      var okM=activeMeth.size===0||activeMeth.has(c.dataset.meth);
+      if(okP&&okM){c.classList.remove('hide');n++;}else{c.classList.add('hide');}
+    });
+    cnt.textContent=n;
+    empty.style.display=n===0?'block':'none';
+  }
+  function sortCards(){
+    var mode=sortSel.value;
+    var arr=cards.slice();
+    arr.sort(function(a,b){
+      if(mode==='time')return (+a.dataset.time)-(+b.dataset.time);
+      if(mode==='kcal')return (+a.dataset.kcal)-(+b.dataset.kcal);
+      if(mode==='protein')return (+b.dataset.pg)-(+a.dataset.pg);
+      return (+a.dataset.i)-(+b.dataset.i);
+    });
+    arr.forEach(function(c){grid.appendChild(c);});
+  }
+
+  document.querySelectorAll('.chip.protein').forEach(function(ch){
+    ch.addEventListener('click',function(){
+      var v=ch.dataset.prot, on=ch.getAttribute('aria-pressed')==='true';
+      ch.setAttribute('aria-pressed',String(!on));
+      if(on)activeProt.delete(v);else activeProt.add(v);
+      apply();
+    });
+  });
+  document.querySelectorAll('.chip.method').forEach(function(ch){
+    ch.addEventListener('click',function(){
+      var v=ch.dataset.meth, on=ch.getAttribute('aria-pressed')==='true';
+      ch.setAttribute('aria-pressed',String(!on));
+      if(on)activeMeth.delete(v);else activeMeth.add(v);
+      apply();
+    });
+  });
+  document.getElementById('reset').addEventListener('click',function(){
+    activeProt.clear();activeMeth.clear();
+    document.querySelectorAll('.chip').forEach(function(c){c.setAttribute('aria-pressed','false');});
+    sortSel.value='default';sortCards();apply();
+  });
+  sortSel.addEventListener('change',function(){sortCards();apply();});
+
+  document.getElementById('lucky').addEventListener('click',function(){
+    var visible=cards.filter(function(c){return !c.classList.contains('hide');});
+    if(!visible.length)return;
+    var pick=visible[Math.floor(Math.random()*visible.length)];
+    pick.scrollIntoView({behavior:'smooth',block:'center'});
+    pick.style.transition='box-shadow .3s,outline .3s';
+    pick.style.outline='3px solid var(--amber)';
+    pick.style.outlineOffset='3px';
+    setTimeout(function(){pick.style.outline='none';},1600);
+  });
+
+  apply();
+})();
+</script>
+</body>
+</html>
