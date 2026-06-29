@@ -130,7 +130,9 @@
 
   @media (max-width:680px){
     .grid{grid-template-columns:1fr}
-    .filt-label{min-width:auto;width:100%}
+    .controls{position:static;padding:12px 0}
+    .filt-label{min-width:auto}
+    .filt-row{gap:7px}
     .nut-cell .v{font-size:17px} .nut-cell.kcal .v{font-size:20px}
   }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
@@ -192,9 +194,12 @@
         </label>
       </div>
     </div>
-    <div class="legend">
-      栄養の数値：<span class="tag pub">掲載値</span>＝出典サイトに記載／<span class="tag est">予想値</span>＝材料からの概算。予想値は前後する場合があります。<b>「+ご飯80g」</b>は白米80g（約130kcal・糖質約29g）を足した夕食合計の目安です。
-    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="legend">
+    栄養の数値：<span class="tag pub">掲載値</span>＝出典サイトに記載／<span class="tag est">予想値</span>＝材料からの概算。予想値は前後する場合があります。<b>「+ご飯80g」</b>は白米80g（約130kcal・糖質約29g）を足した夕食合計の目安です。
   </div>
 </div>
 
